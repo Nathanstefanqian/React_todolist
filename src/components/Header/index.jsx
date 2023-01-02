@@ -18,8 +18,6 @@ export default class Header extends Component {
         const todoObj = { id: nanoid(), name: target.value, done: false }
         //将todoObj传递给App
         this.props.Addtodo(todoObj)
-
-
     }
     render() {
 

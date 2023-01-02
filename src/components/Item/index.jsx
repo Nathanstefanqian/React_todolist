@@ -8,7 +8,6 @@ export default class Item extends Component {
             this.setState({ mouse: flag })
         }
     }
-
     //取消勾选某一个todo的回调
     handleCheck = (id) => {
         return (event) => {
@@ -33,9 +32,10 @@ export default class Item extends Component {
                         <span>{name}</span>
                     </label>
                     <button className="btn btn-danger" style={{ display: mouse ? 'block' : 'none' }} onClick={() => this.handleDelete(id)}>删除</button>
+                    <button className="btn btn-danger" style={{ display: mouse ? 'block' : 'none' }} onClick={this.handleDelete(id)}>删除</button>
                 </li>
             </div >
-            //defaultChecked 可以让复选框变得可以选择，不是只读
+            //defaultChecked 可以让复选框变得可以选择，不是只读 但是缺点是只会更新第一次加载时的状态
             //Onclick里面是不用高阶的回调函数写法
         )
     }
