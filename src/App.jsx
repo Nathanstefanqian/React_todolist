@@ -4,6 +4,7 @@ import Footer from "./components/Footer/index.jsx"
 import List from "./components/List/index.jsx"
 
 export default class App extends Component {
+
   state = {
     todos: [
       { id: '001', name: '吃饭', done: true },
@@ -33,20 +34,48 @@ export default class App extends Component {
     this.setState({ todos: newtodos })
   }
 
+  //用于更新删除todos项目
+  deleteTodo = (id) => {
+    //获取原来的todos
+    const { todos } = this.state;
+    //删除指定id的todoObj
+    const newtodos = todos.filter((todoObj) => {
+      return todoObj.id !== id
+    })
+    //更新状态
+    this.setState({ todos: newtodos })
+  }
+
+  checkAlltodo = (done) => {
+    const { todos } = this.state
+    const newtodos = todos.map((todoObj) => {
+      return { ...todoObj, done }
+    })
+    this.setState({ todos: newtodos })
+  }
+  clearDonetodo = () => {
+    const { todos } = this.state
+    const newtodos = todos.filter((todoObj) => {
+      return todoObj.done !== true
+    })
+    this.setState({ todos: newtodos })
+  }
+
 
   render() {
-    const { todos, } = this.state
+    const { todos } = this.state
     return (
       <div className="App">
         <div className="todo-container">
           <div className="todo-wrap">
             <Header Addtodo={this.addtodo} />
-            <List Todos={todos} updateTodo={this.updatetodo} />
-            <Footer />
+            <List Todos={todos} updateTodo={this.updatetodo} deleteTodo={this.deleteTodo} />
+            <Footer Todos={todos} checkAlltodo={this.checkAlltodo} clearDonetodo={this.clearDonetodo} />
           </div>
         </div>
       </div>
     )
   }
 }
+
 
